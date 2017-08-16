@@ -1,0 +1,30 @@
+header {
+    background-color: #8cc7ff;
+    color:#ffffff;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+main {
+    background-color: white;
+    padding: 20px;
+}
+
+.post {
+    padding-bottom: 60px;
+}
+
+.post .user-info img {
+    border-radius: 50%;
+}
+
+.post .photo img:hover {
+    opacity:0.5;
+}
+
+title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
