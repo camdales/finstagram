@@ -1,8 +1,13 @@
+helpers do 
+    def current_user
+        User.find_by(id: session[:user_id])
+    end
+end
+
 
 get '/' do 
     
     @posts = Post.order(created_at: :desc)
-    @current_user = User.find_by(id: session[:user_id])
     erb(:index)
 
 end
@@ -66,3 +71,42 @@ get '/logout' do
     session[:user_id] = nil
     redirect to ('/')
 end
+
+    
+get '/posts/new' do
+    @post = Post.new
+   erb(:'posts/new')
+  
+end
+
+post '/posts' do
+    
+    photo_url = params[:photo_url]
+    
+    #instantiate new Post
+    @post = Post.new({ photo_url: photo_url, user_id: current_user.id })
+    
+    # if @post validates, save
+    if @post.save 
+        redirect(to('/'))
+    else
+        
+        #if it doesn't validate render /posts/new
+        erb(:"posts/new")
+    end
+end
+
+
+
+get '/posts/:id' do
+    #find  the post with the ID from the URL
+    @post = Post.find(params[:id])
+    
+    #render app/views/posts/show.erb
+    erb(:"posts/show")
+end
+
+    
+    
+
+

@@ -1,8 +1,13 @@
 class Post < ActiveRecord::Base
-    
+    #this is where the associations are
     belongs_to :user
     has_many :comments
     has_many :likes
+    
+    #validations in between association definitions and methods!
+    validates_presence_of :photo_url, :user 
+    
+    #this is where the def humanized_time_ago method is, etc.
     
     def humanized_time_ago
         time_ago_in_seconds = Time.now - self.created_at
